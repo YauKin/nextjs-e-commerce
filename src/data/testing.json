@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "name": "Premium Coffee Maker",
+      "description": "Professional grade coffee maker with temperature control",
+      "price": 199.99,
+      "category": "Appliances",
+      "rating": 4.5,
+      "stock": 50,
+      "imageUrl": "https://example.com/coffee-maker.jpg"
+    },
+    {
+      "id": "p2",
+      "name": "Wireless Earbuds",
+      "description": "High-quality wireless earbuds with noise cancellation",
+      "price": 149.99,
+      "category": "Electronics",
+      "rating": 4.8,
+      "stock": 100,
+      "imageUrl": "https://example.com/earbuds.jpg"
+    },
+    {
+      "id": "p3",
+      "name": "Yoga Mat",
+      "description": "Non-slip exercise yoga mat with carrying strap",
+      "price": 29.99,
+      "category": "Fitness",
+      "rating": 4.3,
+      "stock": 75,
+      "imageUrl": "https://example.com/yoga-mat.jpg"
+    },
+    {
+      "id": "p4",
+      "name": "Smart Watch",
+      "description": "Fitness tracking smartwatch with heart rate monitor",
+      "price": 299.99,
+      "category": "Electronics",
+      "rating": 4.6,
+      "stock": 30,
+      "imageUrl": "https://example.com/smartwatch.jpg"
+    },
+    {
+      "id": "p5",
+      "name": "Leather Wallet",
+      "description": "Genuine leather wallet with RFID protection",
+      "price": 49.99,
+      "category": "Accessories",
+      "rating": 4.4,
+      "stock": 120,
+      "imageUrl": "https://example.com/wallet.jpg"
+    }
+  ]
+}
