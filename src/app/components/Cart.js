@@ -36,7 +36,7 @@ export default function Cart() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 backdrop-blur-sm">
+    <div className="fixed inset-0 bg-black/30 bg-opacity-50 z-50 backdrop-blur-sm">
       <div
         ref={cartRef}
         className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-lg transform transition-all duration-300 ease-in-out translate-x-0 dark:bg-gray-900"
