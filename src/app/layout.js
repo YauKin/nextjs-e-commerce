@@ -3,10 +3,12 @@ import "./globals.css";
 import { CartProvider } from './contexts/CartContext';
 import Cart from './components/Cart';
 import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin"], 
 });
 
 const geistMono = Geist_Mono({
@@ -26,10 +28,12 @@ export default function RootLayout({ children }) {
         <ErrorBoundary>
           <CartProvider>
             <div className="flex flex-col min-h-screen">
-              <main className="flex-grow">
+              <Navbar />
+              <main className="flex-grow mt-16">
                 {children}
               </main>
               <Cart />
+              <Footer />
             </div>
           </CartProvider>
         </ErrorBoundary>
