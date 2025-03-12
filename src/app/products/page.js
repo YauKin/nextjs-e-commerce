@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import ProductCard from "@/app/components/ProductCard";
 import productsData from "@/data/products.json";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function ProductsPage() {
   const { products } = productsData;
@@ -16,28 +18,33 @@ export default function ProductsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <h1 className="text-3xl font-bold">Our Products</h1>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setCardSize('small')}
-            className={`px-4 py-2 rounded-lg transition-colors ${cardSize === 'small' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-          >
-            Small
-          </button>
-          <button
-            onClick={() => setCardSize('medium')}
-            className={`px-4 py-2 rounded-lg transition-colors ${cardSize === 'medium' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-          >
-            Medium
-          </button>
-          <button
-            onClick={() => setCardSize('large')}
-            className={`px-4 py-2 rounded-lg transition-colors ${cardSize === 'large' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-          >
-            Large
-          </button>
-        </div>
+        <Card className="border-0 shadow-sm bg-background/50 backdrop-blur supports-[backdrop-filter]:bg-background/50">
+          <CardContent className="p-2 flex gap-2">
+            <Button
+              onClick={() => setCardSize('small')}
+              variant={cardSize === 'small' ? 'default' : 'outline'}
+              size="sm"
+            >
+              Small
+            </Button>
+            <Button
+              onClick={() => setCardSize('medium')}
+              variant={cardSize === 'medium' ? 'default' : 'outline'}
+              size="sm"
+            >
+              Medium
+            </Button>
+            <Button
+              onClick={() => setCardSize('large')}
+              variant={cardSize === 'large' ? 'default' : 'outline'}
+              size="sm"
+            >
+              Large
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     
       <div className={`grid ${sizeClasses[cardSize]} gap-6`}>

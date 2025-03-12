@@ -1,6 +1,7 @@
 'use client';
 
 import { useCart } from '../contexts/CartContext';
+import { Button } from '@/components/ui/button';
 
 export default function AddToCartButton({ product }) {
   const { addToCart } = useCart();
@@ -10,11 +11,12 @@ export default function AddToCartButton({ product }) {
   };
 
   return (
-    <button 
-      className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
+    <Button 
+      className="w-full" 
+      size="lg"
       onClick={handleAddToCart}
     >
       Add to Cart
-    </button>
+    </Button>
   );
 }
