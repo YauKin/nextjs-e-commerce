@@ -11,9 +11,10 @@ export default function ImageComponent({
     priority = false,
     sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
     fill = true,
-    width,
-    height,
-    quality = 75
+    width = 400,
+    height = 300,
+    quality = 75,
+    objectFit = "contain"
 }) {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
@@ -29,7 +30,7 @@ export default function ImageComponent({
 
     if (fill) {
         return (
-            <div className={`relative ${className} overflow-hidden`}>
+            <div className={`relative ${className} overflow-hidden`} style={{ aspectRatio: width / height, maxWidth: '100%', maxHeight: '100%' }}>
                 {isLoading && (
                     <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse flex items-center justify-center">
                         <LoadingSpinner size="small" />
@@ -44,7 +45,7 @@ export default function ImageComponent({
                         src={src}
                         alt={alt}
                         fill={fill}
-                        className={`object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                        className={`object-${objectFit} transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                         priority={priority}
                         sizes={sizes}
                         quality={quality}
@@ -69,7 +70,8 @@ export default function ImageComponent({
                     alt={alt}
                     width={width || 800}
                     height={height || 600}
-                    className={`object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                    className={`w-full h-auto transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                    style={{ objectFit }}
                     priority={priority}
                     sizes={sizes}
                     quality={quality}

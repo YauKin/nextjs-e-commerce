@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import productsData from "@/data/products.json";
 import ImageComponent from "@/app/components/ImageComponent";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function Home() {
     const { products } = productsData;
@@ -10,78 +12,100 @@ export default function Home() {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[60vh] bg-gray-100 dark:bg-gray-900">
+            <section className="relative h-[70vh] bg-gradient-to-r from-background to-secondary/20 dark:from-background dark:to-secondary/10">
                 <div className="container mx-auto px-4 h-full flex items-center">
-                    <div className="max-w-2xl">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to Our E-Shop</h1>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">Discover our curated collection of premium products</p>
-                        <Link
-                            href="/products"
-                            className="inline-block bg-foreground text-background px-8 py-3 rounded-full hover:bg-[#383838] dark:hover:bg-[#ccc] transition-colors"
-                        >
-                            Shop Now
-                        </Link>
+                    <div className="max-w-2xl space-y-6">
+                        <h1 className="text-5xl md:text-6xl font-bold tracking-tighter">
+                            Welcome to Our <span className="text-primary">E-Shop</span>
+                        </h1>
+                        <p className="text-xl text-muted-foreground">
+                            Discover our curated collection of premium products
+                        </p>
+                        <Button size="lg" asChild>
+                            <Link href="/products">Shop Now</Link>
+                        </Button>
                     </div>
                 </div>
             </section>
 
             {/* Featured Products */}
-            <section className="py-16">
+            <section className="py-20 bg-secondary/5">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <h2 className="text-3xl font-bold mb-12 text-center">Featured Products</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {featuredProducts.map((product) => (
-                            <Link
-                                href={`/products/${product.id}`}
-                                key={product.id}
-                                className="group"
-                            >
-                                <div className="relative h-64 mb-4 bg-gray-200 rounded-lg overflow-hidden">
-                                    <ImageComponent
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                        fill={false}
-                                        width={800}
-                                        height={600}
-                                    />
-                                </div>
-                                <h3 className="font-semibold mb-2">{product.name}</h3>
-                                <p className="text-lg font-bold">${product.price}</p>
-                            </Link>
+                            <Card key={product.id} className="group overflow-hidden border-0 bg-background/50 backdrop-blur supports-[backdrop-filter]:bg-background/50">
+                                <Link href={`/products/${product.id}`}>
+                                    <CardHeader className="p-0">
+                                        <div className="aspect-square relative overflow-hidden rounded-t-xl bg-muted">
+                                            <ImageComponent
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                fill={true}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                            />
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent className="p-6">
+                                        <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{product.name}</h3>
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-lg font-bold text-primary">${product.price.toFixed(2)}</p>
+                                            <span className="text-sm text-muted-foreground">{product.category}</span>
+                                        </div>
+                                    </CardContent>
+                                </Link>
+                            </Card>
                         ))}
                     </div>
                     <div className="text-center mt-12">
-                        <Link
-                            href="/products"
-                            className="inline-block border border-foreground px-8 py-3 rounded-full hover:bg-foreground hover:text-background transition-colors"
-                        >
-                            View All Products
-                        </Link>
+                        <Button size="lg" variant="outline" asChild>
+                            <Link href="/products" className="gap-2">
+                                View All Products
+                                <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </section>
 
             {/* Categories */}
-            <section className="py-16 bg-gray-50 dark:bg-gray-900">
+            <section className="py-16 bg-card">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold mb-8">Shop by Category</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {Array.from(new Set(products.map(p => p.category))).slice(0, 3).map((category) => (
-                            <div key={category} className="relative h-48 group overflow-hidden rounded-lg">
-                                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors z-10" />
-                                <ImageComponent
-                                    src={products.find(p => p.category === category)?.image || ''}
-                                    alt={category}
-                                    className="h-full w-full"
-                                    fill={false}
-                                    width={800}
-                                    height={600}
-                                />
-                                <div className="absolute inset-0 z-20 flex items-center justify-center">
-                                    <h3 className="text-2xl font-bold text-white">{category}</h3>
-                                </div>
-                            </div>
+                            <Card key={category} className="group overflow-hidden border-0 bg-background/50 backdrop-blur supports-[backdrop-filter]:bg-background/50">
+                                <Link href={`/products?category=${category.toLowerCase()}`} className="block">
+                                    <CardHeader className="p-0">
+                                        <div className="relative h-48 overflow-hidden">
+                                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors z-10" />
+                                            <ImageComponent
+                                                src={products.find(p => p.category === category)?.image || ''}
+                                                alt={category}
+                                                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                fill={true}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw"
+                                            />
+                                            <div className="absolute inset-0 z-20 flex items-center justify-center">
+                                                <h3 className="text-2xl font-bold text-white">{category}</h3>
+                                            </div>
+                                        </div>
+                                    </CardHeader>
+                                </Link>
+                            </Card>
                         ))}
                     </div>
                 </div>
@@ -90,18 +114,17 @@ export default function Home() {
             {/* Promotional Banner */}
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <div className="bg-foreground text-background rounded-2xl p-8 md:p-12">
-                        <div className="max-w-2xl">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">Special Offer</h2>
-                            <p className="text-lg mb-6">Get 20% off on your first purchase. Use code WELCOME20 at checkout.</p>
-                            <Link
-                                href="/products"
-                                className="inline-block bg-background text-foreground px-8 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                            >
-                                Shop Now
-                            </Link>
-                        </div>
-                    </div>
+                    <Card className="bg-primary text-primary-foreground rounded-2xl overflow-hidden">
+                        <CardContent className="p-8 md:p-12">
+                            <div className="max-w-2xl">
+                                <h2 className="text-3xl md:text-4xl font-bold mb-4">Special Offer</h2>
+                                <p className="text-lg mb-6 text-primary-foreground/90">Get 20% off on your first purchase. Use code WELCOME20 at checkout.</p>
+                                <Button variant="secondary" size="lg" asChild>
+                                    <Link href="/products">Shop Now</Link>
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </section>
         </div>
