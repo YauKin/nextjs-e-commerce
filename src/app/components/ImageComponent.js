@@ -30,7 +30,7 @@ export default function ImageComponent({
 
     if (fill) {
         return (
-            <div className={`relative ${className} overflow-hidden`} style={{ aspectRatio: width / height, maxWidth: '100%', maxHeight: '100%' }}>
+            <div className={`relative w-full h-full ${className} overflow-hidden`} style={{ position: 'relative', aspectRatio: width / height, maxWidth: '100%', maxHeight: '100%' }}>
                 {isLoading && (
                     <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse flex items-center justify-center">
                         <LoadingSpinner size="small" />
